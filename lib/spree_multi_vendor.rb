@@ -1,7 +1,7 @@
 require 'spree_core'
 require 'spree_multi_vendor/engine'
 require 'spree_multi_vendor/version'
-require 'spree_extension'
+require 'solidus_support'
 
 module SpreeMultiVendor
   # TODO: this should be moved into preferences
