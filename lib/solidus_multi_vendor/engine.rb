@@ -1,6 +1,6 @@
 module SolidusMultiVendor
   class Engine < Rails::Engine
-    require 'spree/core'
+    require 'solidus/core'
     isolate_namespace Spree
     engine_name 'solidus_multi_vendor'
 
