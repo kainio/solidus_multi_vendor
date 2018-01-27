@@ -1,7 +1,7 @@
-module SpreeMultiVendor
+module SolidusMultiVendor
   module_function
 
-  # Returns the version of the currently loaded SpreeMultiVendor as a
+  # Returns the version of the currently loaded SolidusMultiVendor as a
   # <tt>Gem::Version</tt>.
   def version
     Gem::Version.new VERSION::STRING
@@ -10,7 +10,7 @@ module SpreeMultiVendor
   module VERSION
     MAJOR = 0
     MINOR = 0
-    TINY  = 1
+    TINY  = 2
     PRE   = 'alpha'.freeze
 
     STRING = [MAJOR, MINOR, TINY, PRE].compact.join('.')

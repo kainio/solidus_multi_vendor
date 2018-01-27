@@ -2,19 +2,19 @@
 lib = File.expand_path('../lib/', __FILE__)
 $LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
 
-require 'spree_multi_vendor/version'
+require 'solidus_multi_vendor/version'
 
 Gem::Specification.new do |s|
   s.platform    = Gem::Platform::RUBY
-  s.name        = 'spree_multi_vendor'
-  s.version     = SpreeMultiVendor.version
-  s.summary     = 'Spree multi vendor marketplace extension'
-  s.description = 'Spree multi vendor marketplace extension'
+  s.name        = 'solidus_multi_vendor'
+  s.version     = SolidusMultiVendor.version
+  s.summary     = 'Solidus multi vendor marketplace extension'
+  s.description = 'Solidus multi vendor marketplace extension'
   s.required_ruby_version = '>= 2.2.2'
 
   s.author    = 'Spark Solutions'
   s.email     = 'we@sparksolutions.co'
-  s.homepage  = 'https://github.com/spree-contrib/spree_multi_vendor'
+  s.homepage  = 'https://github.com/tblanchard/solidus_multi_vendor'
   s.license = 'BSD-3-Clause'
 
   # s.files       = `git ls-files`.split("\n")
