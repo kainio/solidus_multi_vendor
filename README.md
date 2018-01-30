@@ -1,4 +1,4 @@
-# Spree Multi Vendor
+# Solidus Multi Vendor
 
 This is a spree multi vendor marketplace extension.
 
@@ -21,7 +21,7 @@ Contributions welcome! :)
 
 1. Add this extension to your Gemfile with this line:
   ```ruby
-  gem 'solidus_multi_vendor', github: 'tblanchard/solidus_multi_vendor'
+  gem 'solidus_multi_vendor', github: 'bevvinc/solidus_multi_vendor'
   ```
 
 2. Install the gem using Bundler:
