@@ -7,6 +7,7 @@ class AddVendorIdToSpreeModels < SolidusSupport::Migration[4.2]
       stock_locations
       shipping_methods
       variants
+      stores
     ]
 
     table_names.each do |table_name|

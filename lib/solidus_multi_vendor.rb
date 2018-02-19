@@ -12,7 +12,8 @@ module SolidusMultiVendor
       Spree::Variant,
       Spree::Property,
       Spree::ShippingMethod,
-      Spree::StockLocation
+      Spree::StockLocation,
+      Spree::Store
     ]
   end
 end
