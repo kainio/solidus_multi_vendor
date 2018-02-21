@@ -12,6 +12,7 @@ module Spree
       has_many :stock_locations
       has_many :variants
       has_many :vendor_users
+      has_many :stores
     end
 
     has_many :users, through: :vendor_users
@@ -35,5 +36,6 @@ module Spree
     def create_stock_location
       stock_locations.where(name: name, country: Spree::Country.default).first_or_create!
     end
+
   end
 end
