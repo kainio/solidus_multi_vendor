@@ -32,7 +32,7 @@ RSpec.feature 'Admin Property', :js do
     context 'create' do
       scenario 'can create a new property' do
         click_link 'New Property'
-        expect(current_path).to eq spree.new_admin_property_path
+        expect(current_path).to eq spree.admin_properties_path
 
         fill_in 'property_name', with: 'Vendor property'
         fill_in 'property_presentation', with: 'Vendor property'
