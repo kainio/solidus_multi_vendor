@@ -32,8 +32,7 @@ RSpec.feature 'Admin Option Types', :js do
     context 'create' do
       scenario 'can create a new option type' do
         click_link 'New Option Type'
-        expect(current_path).to eq spree.new_admin_option_type_path
-
+        expect(current_path).to eq spree.admin_option_types_path
         fill_in 'option_type_name', with: 'Vendor option type'
         fill_in 'option_type_presentation', with: 'Vendor option type'
 

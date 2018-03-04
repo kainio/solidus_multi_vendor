@@ -43,11 +43,10 @@ RSpec.feature 'Admin Products', :js do
       end
     end
 
-    context 'create product' do
+    context 'create' do
       scenario 'can create a new product' do
         click_link 'New Product'
-        expect(current_path).to eq spree.new_admin_product_path
-
+        expect(current_path).to eq spree.admin_products_path
         fill_in 'product_name', with: 'Vendor product'
         fill_in 'product_price', with: 15
         select Spree::ShippingCategory.last.name
@@ -84,7 +83,7 @@ RSpec.feature 'Admin Products', :js do
       scenario 'shows validation error with blank name' do
         fill_in 'product_name', with: ''
         click_button 'Update'
-        expect(page).to have_text 'Name can\'t be blank'
+        expect(current_path).to eq spree.edit_admin_product_path(vendor_product)
       end
     end
 
