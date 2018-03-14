@@ -11,7 +11,7 @@ RSpec.feature 'Admin Vendors', :js do
 
   context 'index' do
     scenario 'displays existing vendors' do
-      within_row(1) do
+      within("table.table tbody tr:nth-of-type(1)") do
         expect(column_text(1)).to eq 'My vendor'
         expect(column_text(2)).to eq 'pending'
       end
@@ -24,7 +24,7 @@ RSpec.feature 'Admin Vendors', :js do
       expect(current_path).to eq spree.new_admin_vendor_path
 
       fill_in 'vendor_name', with: 'Test'
-      select 'Blocked'
+      select2_search 'Blocked', from: 'state'
 
       click_button 'Create'
 
@@ -55,7 +55,7 @@ RSpec.feature 'Admin Vendors', :js do
 
   context 'edit' do
     background do
-      within_row(1) { click_icon :edit }
+      within("table.table tbody tr:nth-of-type(1)") { click_icon :edit }
       expect(current_path).to eq spree.edit_admin_vendor_path(1)
     end
 

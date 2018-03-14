@@ -22,6 +22,7 @@ class Spree::VendorAbility
       apply_variant_permissions
       apply_vendor_permissions
       apply_vendor_settings_permissions
+      apply_store_permissions
     end
   end
 
@@ -76,6 +77,7 @@ class Spree::VendorAbility
   end
 
   def apply_shipping_methods_permissions
+    can :admin, Spree::ShippingMethod
     can :manage, Spree::ShippingMethod, vendor_id: @vendor_ids
     can :create, Spree::ShippingMethod
   end
@@ -110,5 +112,10 @@ class Spree::VendorAbility
 
   def apply_vendor_settings_permissions
     can :manage, :vendor_settings
+  end
+
+  def apply_store_permissions
+    cannot :display, Spree::Zone
+    can :manage, Spree::Store
   end
 end
