@@ -16,6 +16,7 @@
   <thead>
     <tr>
       <th>Name</th>
+      <th><%= Spree.t(:vendor_name) %>
       <th>Url</th>
       <th class="actions"></th>
     </tr>
@@ -28,6 +29,9 @@
           <% if store.default? %>
             <span class="label label-default">default</span>
           <% end %>
+        </td>
+        <td>
+          <%= store.try(:vendor).try(:name) %>
         </td>
         <td><%= store.url %></td>
         <td class="actions">
