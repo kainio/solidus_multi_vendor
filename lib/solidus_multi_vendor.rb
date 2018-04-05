@@ -7,10 +7,10 @@ module SolidusMultiVendor
   # TODO: this should be moved into preferences
   def self.vendorized_models
     [
-      Spree::OptionType,
+#      Spree::OptionType,
       Spree::Product,
-      Spree::Variant,
-      Spree::Property,
+#      Spree::Variant,
+#      Spree::Property,
       Spree::ShippingMethod,
       Spree::StockLocation,
       Spree::Store
