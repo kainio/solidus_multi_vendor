@@ -14,8 +14,6 @@ module Spree
 
     has_many :users, through: :vendor_users
 
-    after_create :create_stock_location
-
     state_machine :state, initial: :pending do
       event :activate do
         transition to: :active
