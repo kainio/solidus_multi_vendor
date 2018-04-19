@@ -26,10 +26,10 @@ module Spree
 
     self.whitelisted_ransackable_attributes = %w[name state]
 
-    private
+    before_save :populate_state
 
-    def create_stock_location
-      location = stock_locations.where(name: name, vendor: self, country: Spree::Country.default, propagate_all_variants: false).first_or_initialize
+    def populate_state
+      state ||= :pending
     end
 
   end
