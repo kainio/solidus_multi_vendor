@@ -39,7 +39,7 @@ RSpec.feature 'Admin Vendors', :js do
       fill_in 'vendor_name', with: ''
       click_button 'Create'
 
-      expect(page).to have_text 'name can\'t be blank'
+      expect(page).to have_text 'Name can\'t be blank'
     end
 
     scenario 'shows validation error with repeated name' do
@@ -49,7 +49,7 @@ RSpec.feature 'Admin Vendors', :js do
       fill_in 'vendor_name', with: 'My vendor'
       click_button 'Create'
 
-      expect(page).to have_text 'name has already been taken'
+      expect(page).to have_text 'Name has already been taken'
     end
   end
 
@@ -69,7 +69,7 @@ RSpec.feature 'Admin Vendors', :js do
     scenario 'shows validation error with blank name' do
       fill_in 'vendor_name', with: ''
       click_button 'Update'
-      expect(page).to have_text 'name can\'t be blank'
+      expect(page).to have_text 'Name can\'t be blank'
     end
 
     scenario 'shows validation error with repeated name' do
@@ -77,7 +77,7 @@ RSpec.feature 'Admin Vendors', :js do
 
       fill_in 'vendor_name', with: 'New vendor'
       click_button 'Update'
-      expect(page).to have_text 'name has already been taken'
+      expect(page).to have_text 'Name has already been taken'
     end
   end
 end

@@ -5,7 +5,7 @@ RSpec.feature 'Admin Stock Locations', :js do
   let!(:product) { create(:product, vendor_id: vendor.id, name: 'Test') }
   let!(:user) { create(:user, vendors: [vendor]) }
   let!(:admin) { create(:admin_user) }
-  let!(:stock_location) { create(:stock_location, name: 'Test') }
+  let!(:stock_location) { create(:stock_location, name: 'Test', vendor: vendor) }
 
   context 'for user with admin role' do
     context 'index' do
@@ -29,13 +29,6 @@ RSpec.feature 'Admin Stock Locations', :js do
       end
     end
 
-    context 'stock movements' do
-      scenario 'displays stock movements for vendor stock location' do
-        click_on 'Stock Movements'
-        expect(page).to have_text 'Stock Movements for Test vendor'
-      end
-    end
-
     context 'create' do
       scenario 'can create a new stock location' do
         click_link 'New Stock Location'
@@ -46,7 +39,6 @@ RSpec.feature 'Admin Stock Locations', :js do
         click_button 'Create'
 
         expect(page).to have_text 'successfully created!'
-        expect(current_path).to eq spree.admin_stock_locations_path
         expect(Spree::StockLocation.last.vendor_id).to eq vendor.id
       end
     end
