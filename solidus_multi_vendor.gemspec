@@ -17,12 +17,11 @@ Gem::Specification.new do |s|
   s.homepage  = 'https://github.com/tblanchard/solidus_multi_vendor'
   s.license = 'BSD-3-Clause'
 
-  # s.files       = `git ls-files`.split("\n")
-  # s.test_files  = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_path = 'lib'
   s.requirements << 'none'
 
-  s.add_dependency 'solidus_core', '>= 2.4.0'
+  solidus_version = ['>= 1.0', '< 3']
+  s.add_dependency 'solidus_core', solidus_version
   s.add_dependency 'solidus_support'
 
   s.add_development_dependency 'capybara'
