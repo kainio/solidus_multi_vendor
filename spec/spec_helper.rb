@@ -13,7 +13,8 @@ end
 require 'pry'
 require 'ffaker'
 require 'rspec/rails'
-require 'shoulda/matchers'
+
+Dir[File.join(File.dirname(__FILE__), '/support/**/*.rb')].each { |file| require file }
 
 include Warden::Test::Helpers
 Warden.test_mode!
@@ -36,5 +37,3 @@ RSpec.configure do |config|
     Rails.cache.clear
   end
 end
-
-Dir[File.join(File.dirname(__FILE__), '/support/**/*.rb')].each { |file| require file }

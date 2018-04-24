@@ -4,7 +4,7 @@
 
 <% content_for :page_actions do %>
   <li>
-    <%= button_link_to t('spree.new_vendor'), new_object_url %>
+    <%= link_to t("spree.new_vendor"), new_object_url, class: "btn btn-primary" %>
   </li>
 <% end if can?(:create, Spree::Vendor) %>
 
@@ -12,21 +12,25 @@
   <div data-hook="admin_vendors_index_search">
     <%= search_form_for [:admin, @search] do |f| %>
       <div class="row">
-        <div class="col-6">
+        <div class="col-3">
           <div class="field">
             <%= f.label :name_cont, Spree::Vendor.human_attribute_name(:name) %>
-            <%= f.text_field :name_cont, tabindex: 1, class: "form-control js-quick-search-target" %>
+            <%= f.text_field :name_cont, tabindex: 1, class: "fullwidth js-quick-search-target" %>
           </div>
         </div>
-        <div class="col-6">
+
+        <div class="col-2">
           <div class="field">
             <%= label_tag :q_state_eq, Spree.t(:state) %>
-            <%= f.select :state_eq, Spree::Vendor.state_machines[:state].states.collect { |s| [Spree.t("vendor_states.#{s.name}"), s.value] }, { include_blank: true }, class: 'select2 js-filterable' %>
+            <%= f.select :state_eq, Spree::Vendor.state_machines[:state].states.collect { |s| [Spree.t("vendor_states.#{s.name}"), s.value] }, { include_blank: true }, class: 'select2 js-filterable fullwidth' %>
           </div>
         </div>
       </div>
-      <div data-hook="admin_vendors_index_search_buttons" class="form-actions">
-        <%= button Spree.t(:filter_results), 'search' %>
+
+      <div class="actions filter-actions">
+        <div data-hook="admin_vendors_index_search_buttons">
+          <%= button_tag Spree.t(:filter_results), class: 'btn btn-primary' %>
+        </div>
       </div>
     <% end %>
   </div>
@@ -62,15 +66,22 @@
           <td>
             <%= pretty_time(vendor.created_at) %>
           </td>
-          <td class="actions actions-2 text-right">
-            <%= link_to_edit vendor, no_text: true, class: 'edit' if can?(:edit, vendor) %>
+          <td class="actions">
+            <% if can?(:update, vendor) %>
+              <%= link_to_edit(vendor, no_text: true) %>
+            <% end %>
+            <% if can?(:destroy, vendor) %>
+              <%= link_to_delete(vendor, no_text: true) %>
+            <% end %>
           </td>
         </tr>
       <% end %>
     </tbody>
   </table>
 <% else %>
-  <div class="alert alert-info alpha twelve columns no-objects-found">
-    <%= Spree.t(:no_resource_found, resource: plural_resource_name(Spree::Vendor)) %>
+  <div class="no-objects-found">
+    <%= render 'spree/admin/shared/no_objects_found',
+                 resource: Spree::Vendor,
+                 new_resource_url: new_object_url %>
   </div>
 <% end %>

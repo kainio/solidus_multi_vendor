@@ -1,0 +1,8 @@
+<!-- insert_before "erb[loud]:contains('f.field_container :admin_name')" -->
+
+<% if current_spree_user.respond_to?(:has_spree_role?) && current_spree_user.has_spree_role?(:admin) %>
+  <%= f.field_container :vendors do %>
+    <%= f.label :vendor %>
+    <%= f.select :vendor_id, Spree::Vendor.all.map { |tc| [tc.name, tc.id] }, {include_blank: true}, class: "custom-select fullwidth" %>
+  <% end %>
+<% end %>
