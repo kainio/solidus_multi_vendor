@@ -1,0 +1,5 @@
+<!-- insert_before "th.actions" -->
+
+<% if current_spree_user.respond_to?(:has_spree_role?) && current_spree_user.has_spree_role?(:admin) %>
+  <th><%= Spree.t(:vendor_name) %></th>
+<% end %>

@@ -1,0 +1,5 @@
+<!-- insert_before "td.actions" -->
+
+<% if current_spree_user.respond_to?(:has_spree_role?) && current_spree_user.has_spree_role?(:admin) %>
+  <td><%= shipping_method&.vendor&.name %>
+<% end %>

@@ -1,0 +1,8 @@
+<!-- insert_before "erb[silent]:contains('if Spree::Config[:can_restrict_stock_management] && can?(:display, Spree::StockLocation)')" -->
+
+<% if current_spree_user.respond_to?(:has_spree_role?) && current_spree_user.has_spree_role?(:admin) %>
+  <%= f.field_container :vendor_ids do %>
+    <%= f.label :vendor_ids, Spree.t(:vendors) %>
+    <%= f.collection_select(:vendor_ids, Spree::Vendor.all, :id, :name, { }, { class: 'fullwidth select2', multiple: true }) %>
+  <% end %>
+<% end %>
