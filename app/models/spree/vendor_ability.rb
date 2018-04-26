@@ -32,7 +32,7 @@ class Spree::VendorAbility
 
   def apply_order_permissions
     cannot :create, Spree::Order
-    can [:admin, :index, :edit, :update, :display], Spree::Order, line_items: { variant: { vendor_id: @vendor_ids } }
+    can [:admin, :index, :edit, :update, :display], Spree::Order, line_items: { variant: { product: { vendor_id: @vendor_ids } } }
   end
 
   def apply_image_permissions
@@ -44,7 +44,7 @@ class Spree::VendorAbility
   end
 
   def apply_price_permissions
-    can :modify, Spree::Price, variant: { vendor_id: @vendor_ids }
+    can :modify, Spree::Price, variant: { product: { vendor_id: @vendor_ids } }
   end
 
   def apply_product_permissions
@@ -61,7 +61,7 @@ class Spree::VendorAbility
 
   def apply_product_properties_permissions
     cannot :display, Spree::ProductProperty
-    can :manage, Spree::ProductProperty, property: { vendor_id: @vendor_ids }
+    can :manage, Spree::ProductProperty, property: { product: { vendor_id: @vendor_ids } }
   end
 
   def apply_shipping_methods_permissions
@@ -90,7 +90,7 @@ class Spree::VendorAbility
 
   def apply_variant_permissions
     cannot :display, Spree::Variant
-    can :manage, Spree::Variant, vendor_id: @vendor_ids
+    can :manage, Spree::Variant, product: { vendor_id: @vendor_ids }
     can :create, Spree::Variant
   end
 
