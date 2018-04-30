@@ -20,7 +20,7 @@ class Spree::VendorAbility
       apply_variant_permissions
       apply_vendor_permissions
       apply_vendor_settings_permissions
-      apply_store_permissions
+      apply_store_permissions user
     end
   end
 
@@ -102,8 +102,14 @@ class Spree::VendorAbility
     can :manage, :vendor_settings
   end
 
-  def apply_store_permissions
+  def apply_store_permissions user
     cannot :display, Spree::Zone
-    can :manage, Spree::Store
+
+    if user.admin?
+      can :manage, Spree::Store
+    else
+      store_ids = Spree::Store.where(vendor_id: user.vendors.pluck(:id)).pluck(:id)
+      can :manage, Spree::Store, id: store_ids
+    end
   end
 end
