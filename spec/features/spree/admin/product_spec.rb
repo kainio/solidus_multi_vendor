@@ -43,10 +43,6 @@ RSpec.feature 'Admin Products', :js do
         fill_in 'product_price', with: 15
         select Spree::ShippingCategory.last.name
 
-        File.open('create.html', 'w') do |f|
-          f.write(page.body)
-        end
-
         click_button 'Create'
 
         expect(page).to have_text 'successfully created!'
