@@ -30,6 +30,10 @@ RSpec.feature 'Admin Products', :js do
       scenario 'displays only vendor product' do
         expect(page).to have_selector('tr', count: 2)
       end
+
+      scenario 'does not display product types' do
+        expect(page).not_to have_text 'Property Types'
+      end
     end
 
     context 'create' do
@@ -38,6 +42,10 @@ RSpec.feature 'Admin Products', :js do
         fill_in 'product_name', with: 'Vendor product'
         fill_in 'product_price', with: 15
         select Spree::ShippingCategory.last.name
+
+        File.open('create.html', 'w') do |f|
+          f.write(page.body)
+        end
 
         click_button 'Create'
 
@@ -74,7 +82,7 @@ RSpec.feature 'Admin Products', :js do
     end
 
     context 'create product property' do
-      scenario 'can create new product property' do
+      scenario 'cannot create new product property' do
         visit spree.admin_product_product_properties_path(vendor_product)
         fill_in 'product[product_properties_attributes][0][property_name]', with: 'Testing edit'
         click_button 'Update'

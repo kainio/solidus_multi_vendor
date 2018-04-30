@@ -55,8 +55,8 @@ class Spree::VendorAbility
 
   def apply_properties_permissions
     cannot :display, Spree::Property
-    can :manage, Spree::Property, vendor_id: @vendor_ids
-    can :create, Spree::Property
+    cannot :manage, Spree::Property
+    cannot :create, Spree::Property
   end
 
   def apply_product_properties_permissions
