@@ -3,6 +3,7 @@ class Spree::VendorAbility
 
   def initialize(user)
     @vendor_ids = user.vendors.pluck(:id)
+    @store_ids = Spree::Store.where(vendor_id: @vendor_ids).pluck(:id)
 
     if @vendor_ids.any?
       apply_classifications_permissions
@@ -12,6 +13,7 @@ class Spree::VendorAbility
       apply_product_permissions
       apply_product_properties_permissions
       apply_properties_permissions
+      apply_shipments_permissions
       apply_shipping_methods_permissions
       apply_stock_permissions
       apply_stock_item_permissions
@@ -64,6 +66,10 @@ class Spree::VendorAbility
     can :manage, Spree::ProductProperty, property: { product: { vendor_id: @vendor_ids } }
   end
 
+  def apply_shipments_permissions
+    can [:create, :read, :update, :destroy, :ship, :display], Spree::Shipment, order: { store_id: @store_ids }
+  end
+
   def apply_shipping_methods_permissions
     can :admin, Spree::ShippingMethod
     can :manage, Spree::ShippingMethod, vendor_id: @vendor_ids
@@ -105,11 +111,6 @@ class Spree::VendorAbility
   def apply_store_permissions user
     cannot :display, Spree::Zone
 
-    if user.admin?
-      can :manage, Spree::Store
-    else
-      store_ids = Spree::Store.where(vendor_id: user.vendors.pluck(:id)).pluck(:id)
-      can :manage, Spree::Store, id: store_ids
-    end
+    can :manage, Spree::Store, id: @store_ids
   end
 end
