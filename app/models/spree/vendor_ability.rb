@@ -110,7 +110,7 @@ class Spree::VendorAbility
 
   def apply_store_permissions user
     cannot :display, Spree::Zone
-
     can :manage, Spree::Store, id: @store_ids
+    cannot :admin, Spree::Store
   end
 end
