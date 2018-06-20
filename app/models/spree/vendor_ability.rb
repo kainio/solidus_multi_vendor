@@ -21,7 +21,6 @@ class Spree::VendorAbility
       apply_stock_movement_permissions
       apply_variant_permissions
       apply_vendor_permissions
-      apply_vendor_settings_permissions
       apply_store_permissions user
     end
   end
@@ -102,10 +101,6 @@ class Spree::VendorAbility
 
   def apply_vendor_permissions
     can [:admin, :update], Spree::Vendor, id: @vendor_ids
-  end
-
-  def apply_vendor_settings_permissions
-    can :manage, :vendor_settings
   end
 
   def apply_store_permissions user
