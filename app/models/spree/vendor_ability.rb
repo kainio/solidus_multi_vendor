@@ -33,7 +33,7 @@ class Spree::VendorAbility
 
   def apply_order_permissions
     cannot :create, Spree::Order
-    can [:manage, :cart], Spree::Order, line_items: { variant: { product: { vendor_id: @vendor_ids } } }
+    can %i[manage cart], Spree::Order, line_items: { variant: { product: { vendor_id: @vendor_ids } } }
   end
 
   def apply_image_permissions
@@ -62,11 +62,11 @@ class Spree::VendorAbility
 
   def apply_product_properties_permissions
     cannot :display, Spree::ProductProperty
-    can :manage, Spree::ProductProperty, property: { product: { vendor_id: @vendor_ids } }
+    can :manage, Spree::ProductProperty, product: { vendor_id: @vendor_ids }
   end
 
   def apply_shipments_permissions
-    can [:admin, :create, :read, :update, :destroy, :ship, :display], Spree::Shipment, order: { store_id: @store_ids }
+    can %i[admin create read update destroy ship display], Spree::Shipment, order: { store_id: @store_ids }
   end
 
   def apply_shipping_methods_permissions
@@ -80,7 +80,7 @@ class Spree::VendorAbility
   end
 
   def apply_stock_item_permissions
-    can [:admin, :modify, :read], Spree::StockItem, stock_location: { vendor_id: @vendor_ids }
+    can %i[admin modify read update], Spree::StockItem, stock_location: { vendor_id: @vendor_ids }
   end
 
   def apply_stock_location_permissions
@@ -100,10 +100,10 @@ class Spree::VendorAbility
   end
 
   def apply_vendor_permissions
-    can [:admin, :update], Spree::Vendor, id: @vendor_ids
+    can %i[admin update], Spree::Vendor, id: @vendor_ids
   end
 
-  def apply_store_permissions user
+  def apply_store_permissions(_user)
     cannot :display, Spree::Zone
     can :manage, Spree::Store, id: @store_ids
     cannot :admin, Spree::Store
