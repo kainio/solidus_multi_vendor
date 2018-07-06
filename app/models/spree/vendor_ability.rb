@@ -40,7 +40,7 @@ class Spree::VendorAbility
     can :create, Spree::Image
 
     can [:manage, :modify], Spree::Image do |image|
-      image.viewable_type == 'Spree::Variant' && @vendor_ids.include?(image.viewable.vendor_id)
+      image.viewable_type == 'Spree::Variant' && @vendor_ids.include?(image.viewable.product.vendor_id)
     end
   end
 
