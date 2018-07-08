@@ -14,4 +14,6 @@ gem 'pg'
 gem 'sqlite3'
 gem 'mysql2'
 
+gem 'deface'
+
 gemspec
