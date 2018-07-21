@@ -47,7 +47,7 @@ RSpec.feature 'Admin Shipping Methods', :js do
 
     context 'edit' do
       before(:each) do
-        within_row(1) { click_icon :edit }
+        within_row(1) { find('a[data-action="edit"]').click}
         expect(current_path).to eq spree.edit_admin_shipping_method_path(vendor.shipping_methods.first)
       end
 
