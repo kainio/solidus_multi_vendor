@@ -32,7 +32,7 @@ RSpec.feature 'Admin Shipping Methods', :js do
     context 'create' do
       scenario 'can create a new shipping method' do
         click_link 'New Shipping Method'
-        expect(current_path).to eq spree.new_admin_shipping_method_path
+        expect(page).to have_current_path(spree.new_admin_shipping_method_path)
 
         fill_in 'shipping_method_name', with: 'Vendor shipping method'
         check Spree::ShippingCategory.last.name
@@ -40,7 +40,8 @@ RSpec.feature 'Admin Shipping Methods', :js do
         click_button 'Create'
 
         expect(page).to have_text 'successfully created!'
-        expect(current_path).to eq spree.edit_admin_shipping_method_path(Spree::ShippingMethod.last)
+        expect(page).to have_current_path(spree.edit_admin_shipping_method_path(Spree::ShippingMethod.last))
+
         expect(Spree::ShippingMethod.last.vendor_id).to eq vendor.id
       end
     end
@@ -48,7 +49,7 @@ RSpec.feature 'Admin Shipping Methods', :js do
     context 'edit' do
       before(:each) do
         within_row(1) { find('a[data-action="edit"]').click}
-        expect(current_path).to eq spree.edit_admin_shipping_method_path(vendor.shipping_methods.first)
+        expect(page).to have_current_path(spree.edit_admin_shipping_method_path(vendor.shipping_methods.first))
       end
 
       scenario 'can update an existing shipping method' do
