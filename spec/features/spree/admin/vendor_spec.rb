@@ -21,7 +21,7 @@ RSpec.feature 'Admin Vendors', :js do
   context 'create' do
     scenario 'can create a new vendor' do
       click_link 'New Vendor'
-      expect(current_path).to eq spree.new_admin_vendor_path
+      expect(page).to have_current_path(spree.new_admin_vendor_path)
 
       fill_in 'vendor_name', with: 'Test'
       select2_search 'Blocked', from: 'state'
@@ -29,12 +29,12 @@ RSpec.feature 'Admin Vendors', :js do
       click_button 'Create'
 
       expect(page).to have_text 'successfully created!'
-      expect(current_path).to eq spree.admin_vendors_path
+      expect(page).to have_current_path(spree.admin_vendors_path)
     end
 
     scenario 'shows validation error with blank name' do
       click_link 'New Vendor'
-      expect(current_path).to eq spree.new_admin_vendor_path
+      expect(page).to have_current_path(spree.new_admin_vendor_path)
 
       fill_in 'vendor_name', with: ''
       click_button 'Create'
@@ -44,7 +44,7 @@ RSpec.feature 'Admin Vendors', :js do
 
     scenario 'shows validation error with repeated name' do
       click_link 'New Vendor'
-      expect(current_path).to eq spree.new_admin_vendor_path
+      expect(page).to have_current_path(spree.new_admin_vendor_path)
 
       fill_in 'vendor_name', with: 'My vendor'
       click_button 'Create'
@@ -56,7 +56,7 @@ RSpec.feature 'Admin Vendors', :js do
   context 'edit' do
     background do
       within("table.table tbody tr:nth-of-type(1)") { click_icon :edit }
-      expect(current_path).to eq spree.edit_admin_vendor_path(1)
+        expect(page).to have_current_path(spree.edit_admin_vendor_path(1))
     end
 
     scenario 'can update an existing vendor' do

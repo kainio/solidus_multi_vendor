@@ -32,7 +32,8 @@ RSpec.feature 'Admin Stock Locations', :js do
     context 'create' do
       scenario 'can create a new stock location' do
         click_link 'New Stock Location'
-        expect(current_path).to eq spree.new_admin_stock_location_path
+        
+        expect(page).to have_current_path(spree.new_admin_stock_location_path)
 
         fill_in 'stock_location_name', with: 'Vendor stock location'
 
@@ -46,7 +47,7 @@ RSpec.feature 'Admin Stock Locations', :js do
     context 'edit' do
       before(:each) do
         within_row(1) { click_icon :edit }
-        expect(current_path).to eq spree.edit_admin_stock_location_path(vendor.stock_locations.first)
+        expect(page).to have_current_path(spree.edit_admin_stock_location_path(vendor.stock_locations.first))
       end
 
       scenario 'can update an existing stock location' do

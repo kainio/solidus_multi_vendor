@@ -73,7 +73,8 @@ RSpec.feature 'Admin Products', :js do
       scenario 'shows validation error with blank name' do
         fill_in 'product_name', with: ''
         click_button 'Update'
-        expect(current_path).to eq spree.edit_admin_product_path(vendor_product)
+        
+        expect(page).to have_current_path(spree.edit_admin_product_path(vendor_product))
       end
     end
 
