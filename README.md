@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/kainio/solidus_multi_vendor.svg?branch=master)](https://travis-ci.org/kainio/solidus_multi_vendor)
 # Solidus Multi Vendor
 
 This is a spree multi vendor marketplace extension.
@@ -6,14 +7,14 @@ This is a spree multi vendor marketplace extension.
 Vendorized management of:
 
 * Products
-* Option Types
-* Properties
 * Stock Locations
 * Shipping Methods
 * Vendor info
 
 # What it doesn't have (yet)?
 * Vendorized Orders management
+* Option Types
+* Properties
 
 Contributions welcome! :)
 
@@ -21,7 +22,7 @@ Contributions welcome! :)
 
 1. Add this extension to your Gemfile with this line:
   ```ruby
-  gem 'solidus_multi_vendor', github: 'bevvinc/solidus_multi_vendor'
+  gem 'solidus_multi_vendor', github: 'kainio/solidus_multi_vendor'
   ```
 
 2. Install the gem using Bundler:
