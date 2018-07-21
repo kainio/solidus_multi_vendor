@@ -13,24 +13,6 @@ end
 require 'pry'
 require 'ffaker'
 require 'rspec/rails'
-require 'capybara'
-
-Capybara.register_driver :poltergeist do |app|
-  options = {
-    debug: true,
-    timeout: 30,
-    port: ENV['PORT'].to_i,
-    host: ENV['IP'],
-    phantomjs_options: [
-      '--proxy-type=none', 
-      '--load-images=no', 
-      '--ignore-ssl-errors=yes', 
-      '--ssl-protocol=any',
-      '--web-security=false','--debug=true'
-    ]
-  }
-  Capybara::Poltergeist::Driver.new(app, options)
-end
 
 Dir[File.join(File.dirname(__FILE__), '/support/**/*.rb')].each { |file| require file }
 
@@ -53,5 +35,20 @@ RSpec.configure do |config|
 
   config.before :each do
     Rails.cache.clear
+  end
+  config.before :all do
+    ENV['PRECOMPILE_ASSETS'] ||= begin
+      case self.class.metadata[:type]
+      when :feature, :view
+        STDOUT.write "Precompiling assets..."
+
+        require 'rake'
+        Rails.application.load_tasks
+        Rake::Task['assets:precompile'].invoke
+
+        STDOUT.puts " done."
+        Time.now.to_s
+      end
+    end
   end
 end
