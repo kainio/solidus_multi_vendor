@@ -10,4 +10,8 @@ else
   gem 'rails_test_params_backport', group: :test
 end
 
+group :test do
+  gem 'phantomjs', :require => 'phantomjs/poltergeist'
+end
+
 gemspec

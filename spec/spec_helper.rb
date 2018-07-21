@@ -13,6 +13,24 @@ end
 require 'pry'
 require 'ffaker'
 require 'rspec/rails'
+require 'capybara'
+
+Capybara.register_driver :poltergeist do |app|
+  options = {
+    debug: true,
+    timeout: 30,
+    port: ENV['PORT'].to_i,
+    host: ENV['IP'],
+    phantomjs_options: [
+      '--proxy-type=none', 
+      '--load-images=no', 
+      '--ignore-ssl-errors=yes', 
+      '--ssl-protocol=any',
+      '--web-security=false','--debug=true'
+    ]
+  }
+  Capybara::Poltergeist::Driver.new(app, options)
+end
 
 Dir[File.join(File.dirname(__FILE__), '/support/**/*.rb')].each { |file| require file }
 
