@@ -1,58 +1,28 @@
-require 'simplecov'
-SimpleCov.start 'rails'
+# frozen_string_literal: true
 
-ENV['RAILS_ENV'] ||= 'test'
+# Configure Rails Environment
+ENV['RAILS_ENV'] = 'test'
 
-begin
-  require File.expand_path('../dummy/config/environment', __FILE__)
-rescue LoadError
-  puts 'Could not load dummy application. Please ensure you have run `bundle exec rake test_app`'
-  exit
-end
+# Run Coverage report
+require 'solidus_dev_support/rspec/coverage'
 
+require File.expand_path('dummy/config/environment.rb', __dir__).tap { |file|
+  # Create the dummy app if it's still missing.
+  system 'bin/rake extension:test_app' unless File.exist? file
+}
 require 'pry'
-require 'ffaker'
-require 'rspec/rails'
 
-include Warden::Test::Helpers
-Warden.test_mode!
+# Requires factories and other useful helpers defined in spree_core.
+require 'solidus_dev_support/rspec/feature_helper'
 
+# Requires supporting ruby files with custom matchers and macros, etc,
+# in spec/support/ and its subdirectories.
+Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
-Dir[File.join(File.dirname(__FILE__), '/support/**/*.rb')].each { |file| require file }
-
-include Warden::Test::Helpers
-Warden.test_mode!
+# Requires factories defined in lib/solidus_multi_vendor/factories.rb
+require 'solidus_multi_vendor/factories'
 
 RSpec.configure do |config|
-  config.mock_with :rspec
-  config.use_transactional_fixtures = false
-  config.fail_fast = false
-  config.filter_run focus: true
-  config.run_all_when_everything_filtered = true
-
   config.infer_spec_type_from_file_location!
-  config.raise_errors_for_deprecations!
-
-  config.expect_with :rspec do |expectations|
-    expectations.syntax = :expect
-  end
-
-  config.before :each do
-    Rails.cache.clear
-  end
-  config.before :all do
-    ENV['PRECOMPILE_ASSETS'] ||= begin
-      case self.class.metadata[:type]
-      when :feature, :view
-        STDOUT.write "Precompiling assets..."
-
-        require 'rake'
-        Rails.application.load_tasks
-        Rake::Task['assets:precompile'].invoke
-
-        STDOUT.puts " done."
-        Time.now.to_s
-      end
-    end
-  end
+  config.use_transactional_fixtures = false
 end

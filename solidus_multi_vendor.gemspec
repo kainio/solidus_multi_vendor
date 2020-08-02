@@ -1,47 +1,37 @@
-# encoding: UTF-8
-lib = File.expand_path('../lib/', __FILE__)
-$LOAD_PATH.unshift lib unless $LOAD_PATH.include?(lib)
+# frozen_string_literal: true
 
-require 'solidus_multi_vendor/version'
+require_relative 'lib/solidus_multi_vendor/version'
 
-Gem::Specification.new do |s|
-  s.platform    = Gem::Platform::RUBY
-  s.name        = 'solidus_multi_vendor'
-  s.version     = SolidusMultiVendor.version
-  s.summary     = 'Solidus multi vendor marketplace extension'
-  s.description = 'Solidus multi vendor marketplace extension'
-  s.required_ruby_version = '>= 2.2.2'
+Gem::Specification.new do |spec|
+  spec.name = 'solidus_multi_vendor'
+  spec.version = SolidusMultiVendor::VERSION
+  spec.authors = ['Spark Solutions', 'kainio']
+  spec.email = 'poliamus@yahoo.com'
 
-  s.author    = 'Spark Solutions'
-  s.email     = 'we@sparksolutions.co'
-  s.homepage  = 'https://github.com/tblanchard/solidus_multi_vendor'
-  s.license = 'BSD-3-Clause'
+  spec.summary = 'Solidus multi vendor marketplace extension'
+  spec.description = 'Solidus multi vendor marketplace extension'
+  spec.homepage = 'https://github.com/kainio/solidus_multi_vendor'
+  spec.license = 'BSD-3-Clause'
 
-  s.require_path = 'lib'
-  s.requirements << 'none'
+  spec.metadata['homepage_uri'] = spec.homepage
+  spec.metadata['source_code_uri'] = 'https://github.com/kainio/solidus_multi_vendor'
 
-  solidus_version = ['>= 1.0', '< 3']
-  s.add_dependency 'solidus_core', solidus_version
-  s.add_dependency 'solidus_support'
-  s.add_dependency 'deface'
+  spec.required_ruby_version = Gem::Requirement.new('~> 2.5')
 
-  s.add_development_dependency 'capybara'
-  s.add_development_dependency 'puma'
-  s.add_development_dependency 'capybara-screenshot'
-  s.add_development_dependency 'coffee-rails'
-  s.add_development_dependency 'database_cleaner'
-  s.add_development_dependency 'factory_bot'
-  s.add_development_dependency 'ffaker'
-  #s.add_development_dependency 'phantomjs'
-  s.add_development_dependency 'poltergeist'
-  s.add_development_dependency 'rspec-rails'
-  s.add_development_dependency 'sass-rails'
-  s.add_development_dependency 'selenium-webdriver'
-  s.add_development_dependency 'simplecov'
-  s.add_development_dependency 'sqlite3'
-  s.add_development_dependency 'pg'
-  s.add_development_dependency 'mysql2'
-  s.add_development_dependency 'appraisal'
-  s.add_development_dependency 'pry'
-  s.add_development_dependency 'shoulda-matchers'
+  # Specify which files should be added to the gem when it is released.
+  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
+  files = Dir.chdir(__dir__) { `git ls-files -z`.split("\x0") }
+
+  spec.files = files.grep_v(%r{^(test|spec|features)/})
+  spec.test_files = files.grep(%r{^(test|spec|features)/})
+  spec.bindir = "exe"
+  spec.executables = files.grep(%r{^exe/}) { |f| File.basename(f) }
+  spec.require_paths = ["lib"]
+
+  spec.add_dependency 'solidus_core', ['>= 2.0.0', '< 3']
+  spec.add_dependency 'solidus_support', '~> 0.5'
+
+  spec.add_development_dependency 'shoulda-matchers'
+  spec.add_development_dependency "pry"
+  spec.add_development_dependency 'solidus_dev_support'
 end

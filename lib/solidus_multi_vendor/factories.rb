@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 FactoryBot.define do
   GEM_ROOT = File.dirname(File.dirname(File.dirname(__FILE__)))
 

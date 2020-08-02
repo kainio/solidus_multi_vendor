@@ -1,7 +1,15 @@
+# frozen_string_literal: true
+
+require 'spree/core'
+require 'solidus_multi_vendor'
+require 'solidus_support'
+
 module SolidusMultiVendor
   class Engine < Rails::Engine
-    require 'spree/core'
-    isolate_namespace Spree
+    include ::SolidusSupport::EngineExtensions
+
+    isolate_namespace ::Spree
+
     engine_name 'solidus_multi_vendor'
 
     # use rspec for tests
@@ -10,7 +18,7 @@ module SolidusMultiVendor
     end
 
     initializer "solidus_multi_vendor.register_vendor_abilities" do
-      Spree::Ability.register_ability(Spree::VendorAbility)
+      ::Spree::Ability.register_ability(::Spree::VendorAbility)
     end
 
     def self.activate

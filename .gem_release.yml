@@ -1,0 +1,5 @@
+bump:
+  recurse: false
+  file: 'lib/solidus_multi_vendor/version.rb'
+  message: Bump SolidusMultiVendor to %{version}
+  tag: true
