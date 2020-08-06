@@ -12,7 +12,7 @@ module SolidusMultiVendor
       Spree::Product,
       Spree::ShippingMethod,
       Spree::StockLocation,
-      Spree::Store
+      #Spree::Store
     ]
   end
 end

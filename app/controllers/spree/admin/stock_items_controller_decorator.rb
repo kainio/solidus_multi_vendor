@@ -1,4 +1,4 @@
-Spree::Admin::StockItemsController.class_eval do
+module Spree::Admin::StockItemsControllerDecorator
   private
 
   def load_stock_management_data
@@ -15,3 +15,5 @@ Spree::Admin::StockItemsController.class_eval do
     @variants = @variants.order(id: :desc).page(params[:page]).per(params[:per_page] || Spree::Config[:orders_per_page])
   end
 end
+
+Spree::Admin::StockItemsController.prepend Spree::Admin::StockItemsControllerDecorator

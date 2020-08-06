@@ -19,10 +19,11 @@ require 'solidus_dev_support/rspec/feature_helper'
 # in spec/support/ and its subdirectories.
 Dir[File.join(File.dirname(__FILE__), 'support/**/*.rb')].each { |f| require f }
 
-# Requires factories defined in lib/solidus_multi_vendor/factories.rb
-require 'solidus_multi_vendor/factories'
 
 RSpec.configure do |config|
   config.infer_spec_type_from_file_location!
   config.use_transactional_fixtures = false
+
+  config.include Devise::TestHelpers, type: :controller
+  config.include Warden::Test::Helpers
 end

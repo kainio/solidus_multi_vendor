@@ -5,7 +5,7 @@ describe Spree::VendorAbility do
   let!(:shipment){
     FactoryBot.create(:shipment,
                         order: FactoryBot.create(:order,
-                          store: FactoryBot.create(:store, vendor: vendor)))
+                          store: FactoryBot.create(:store)))
   }
   let!(:ability){ Spree::VendorAbility.new FactoryBot.create(:user, vendors: [vendor]) }
 
