@@ -14,11 +14,10 @@ rvm:
   - 2.4
 env:
   matrix:
-    - SOLIDUS_BRANCH=v2.6 DB=postgres
+    - SOLIDUS_BRANCH=v2.10 DB=postgres
     - SOLIDUS_BRANCH=master DB=postgres
-    - SOLIDUS_BRANCH=v2.6 DB=mysql
+    - SOLIDUS_BRANCH=v2.10 DB=mysql
     - SOLIDUS_BRANCH=master DB=mysql
 
 script:
-  - bundle exec rake test_app
-  - bundle exec rake spec
+  - bundle exec bin/rake extension:test_app extension:specs
